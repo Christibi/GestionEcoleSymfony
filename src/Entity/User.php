@@ -25,6 +25,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string')]
     private $password;
 
+    #[ORM\Column(type: 'boolean')]
+    private $isParent;
+
+    #[ORM\Column(type: 'integer', nullable: true)]
+    private $localisation;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -93,5 +99,29 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function isIsParent(): ?bool
+    {
+        return $this->isParent;
+    }
+
+    public function setIsParent(bool $isParent): self
+    {
+        $this->isParent = $isParent;
+
+        return $this;
+    }
+
+    public function getLocalisation(): ?int
+    {
+        return $this->localisation;
+    }
+
+    public function setLocalisation(?int $localisation): self
+    {
+        $this->localisation = $localisation;
+
+        return $this;
     }
 }

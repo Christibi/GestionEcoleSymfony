@@ -19,6 +19,13 @@ class Message
     #[ORM\Column(type: 'string', length: 255)]
     private $contenu;
 
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'messages')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $user;
+
+    #[ORM\Column(type: 'boolean', nullable: true)]
+    private $isFromEcole;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -44,6 +51,30 @@ class Message
     public function setContenu(string $contenu): self
     {
         $this->contenu = $contenu;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    public function isIsFromEcole(): ?bool
+    {
+        return $this->isFromEcole;
+    }
+
+    public function setIsFromEcole(?bool $isFromEcole): self
+    {
+        $this->isFromEcole = $isFromEcole;
 
         return $this;
     }

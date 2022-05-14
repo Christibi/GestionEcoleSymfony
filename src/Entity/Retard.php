@@ -16,6 +16,10 @@ class Retard
     #[ORM\Column(type: 'datetime')]
     private $dateRetard;
 
+    #[ORM\ManyToOne(targetEntity: Eleve::class, inversedBy: 'retards')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $eleve;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -29,6 +33,18 @@ class Retard
     public function setDateRetard(\DateTimeInterface $dateRetard): self
     {
         $this->dateRetard = $dateRetard;
+
+        return $this;
+    }
+
+    public function getEleve(): ?Eleve
+    {
+        return $this->eleve;
+    }
+
+    public function setEleve(?Eleve $eleve): self
+    {
+        $this->eleve = $eleve;
 
         return $this;
     }

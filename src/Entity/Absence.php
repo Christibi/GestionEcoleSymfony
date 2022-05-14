@@ -16,6 +16,10 @@ class Absence
     #[ORM\Column(type: 'date')]
     private $dateAbsence;
 
+    #[ORM\ManyToOne(targetEntity: Eleve::class, inversedBy: 'absences')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $eleve;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -29,6 +33,18 @@ class Absence
     public function setDateAbsence(\DateTimeInterface $dateAbsence): self
     {
         $this->dateAbsence = $dateAbsence;
+
+        return $this;
+    }
+
+    public function getEleve(): ?Eleve
+    {
+        return $this->eleve;
+    }
+
+    public function setEleve(?Eleve $eleve): self
+    {
+        $this->eleve = $eleve;
 
         return $this;
     }
